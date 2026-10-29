@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fff8f4">
-  <meta name="description" content="我们的恋爱小站，收藏从 2026 年 8 月 24 日开始的每一个日子。">
-  <title>我们的恋爱小站</title>
+  <meta name="description" content="刘华伟和路叶的恋爱小站，收藏从 2026 年 8 月 24 日开始的每一个日子。">
+  <title>刘华伟 ♡ 路叶 · 我们的恋爱小站</title>
   <style>
 :root {
   --cream: #fff8f4;
@@ -227,6 +227,76 @@ main,
   font-weight: 700;
   letter-spacing: 0.03em;
   line-height: 1.06;
+}
+
+.names-line {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.1vw, 14px);
+  margin: 0 0 17px;
+  font-size: clamp(30px, 3.6vw, 46px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+.name-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12em 0.38em 0.2em;
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  border-radius: 0.44em 0.62em 0.36em 0.56em;
+  box-shadow: 0 9px 20px rgba(177, 113, 98, 0.13);
+  letter-spacing: 0.06em;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.name-tag::before {
+  position: absolute;
+  top: -0.32em;
+  font-family: Georgia, serif;
+  font-size: 0.4em;
+  line-height: 1;
+}
+
+.name-boy {
+  color: #6d4c43;
+  background: linear-gradient(135deg, #ffe8dc, #ffd1cf);
+  transform: rotate(-2.5deg);
+}
+
+.name-boy::before {
+  right: 0.28em;
+  color: #e6a25e;
+  content: "✦";
+}
+
+.name-girl {
+  color: #7f4d5a;
+  background: linear-gradient(135deg, #ffe8ef, #ffd2e0);
+  transform: rotate(2deg);
+}
+
+.name-girl::before {
+  top: -0.38em;
+  right: 0.24em;
+  color: #ff8fae;
+  content: "✿";
+}
+
+.name-heart {
+  color: var(--rose);
+  font-family: Georgia, serif;
+  font-size: 0.78em;
+  text-shadow: 0 4px 12px rgba(237, 100, 137, 0.22);
+  animation: nameHeart 2.4s ease-in-out infinite;
+}
+
+@keyframes nameHeart {
+  0%, 100% { transform: rotate(-7deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.14); }
 }
 
 .highlight {
@@ -1371,6 +1441,16 @@ main,
     font-size: clamp(49px, 15vw, 66px);
   }
 
+  .names-line {
+    margin-bottom: 13px;
+    gap: 8px;
+    font-size: clamp(24px, 7vw, 32px);
+  }
+
+  .name-tag {
+    border-width: 1px;
+  }
+
   .lead {
     font-size: 15px;
   }
@@ -1564,7 +1644,7 @@ main,
     <nav class="nav" aria-label="主菜单">
       <a class="brand" href="#top">
         <span class="brand-heart">♡</span>
-        <span>我们的小站</span>
+        <span>刘华伟 &amp; 路叶</span>
       </a>
       <div class="nav-links">
         <a href="#photos">照片</a>
@@ -1582,8 +1662,12 @@ main,
           OUR LITTLE UNIVERSE
           <span></span>
         </div>
-        <h1>
-          我们的<br>
+        <h1 class="hero-title">
+          <span class="names-line">
+            <span class="name-tag name-boy">刘华伟</span>
+            <span class="name-heart" aria-label="和">♡</span>
+            <span class="name-tag name-girl">路叶</span>
+          </span>
           <span class="highlight">
             恋爱小站
             <svg class="scribble" viewBox="0 0 240 18" fill="none" aria-hidden="true">
@@ -1704,7 +1788,7 @@ main,
               </g>
             </svg>
           </div>
-          <figcaption>our little world ♡</figcaption>
+          <figcaption>Huawei ♡ Luye</figcaption>
         </figure>
 
         <div class="together-card">
@@ -1897,13 +1981,13 @@ main,
           <span>♡</span>
         </button>
         <p class="wish-text" id="wishText" aria-live="polite"></p>
-        <p class="note-sign">—— 给你的悄悄话</p>
+        <p class="note-sign">—— 刘华伟 写给 路叶</p>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>Made with <b>♡</b> for us</span>
+    <span>刘华伟 <b>♡</b> 路叶</span>
     <span class="footer-dot">·</span>
     <span>Since <span data-anniversary>2026.08.24</span></span>
   </footer>
