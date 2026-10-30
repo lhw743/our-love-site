@@ -1698,6 +1698,16 @@ main,
   box-shadow: 0 15px 30px rgba(255, 124, 159, 0.31);
 }
 
+.gallery-random {
+  color: #96675e;
+  background: linear-gradient(135deg, rgba(255, 239, 244, 0.9), rgba(255, 247, 233, 0.9));
+}
+
+.gallery-random:hover {
+  color: var(--rose-deep);
+  background: white;
+}
+
 .sync-icon {
   display: inline-block;
   color: var(--rose-deep);
@@ -2201,6 +2211,653 @@ main,
   }
 }
 
+/* ===== Future section: milestones, wishes, places, playlist ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.milestone-bar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.milestone-card {
+  position: relative;
+  overflow: hidden;
+  padding: 21px 23px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 25px;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.82), transparent 25%),
+    linear-gradient(145deg, rgba(255, 238, 241, 0.88), rgba(255, 249, 239, 0.88));
+  box-shadow: var(--shadow-small);
+}
+
+.milestone-card:nth-child(2) {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.82), transparent 25%),
+    linear-gradient(145deg, rgba(255, 240, 218, 0.86), rgba(255, 247, 236, 0.9));
+}
+
+.milestone-card:nth-child(3) {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.82), transparent 25%),
+    linear-gradient(145deg, rgba(237, 243, 255, 0.88), rgba(255, 244, 246, 0.9));
+}
+
+.milestone-card::after {
+  position: absolute;
+  right: -20px;
+  bottom: -34px;
+  color: rgba(255, 255, 255, 0.62);
+  content: "♡";
+  font-family: Georgia, serif;
+  font-size: 100px;
+  line-height: 1;
+  transform: rotate(-12deg);
+}
+
+.milestone-label {
+  position: relative;
+  z-index: 1;
+  color: #9a7770;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.milestone-days {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin: 7px 0 6px;
+}
+
+.milestone-days strong {
+  color: var(--rose-deep);
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 48px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.milestone-days span {
+  color: #9c7c74;
+  font-size: 12px;
+}
+
+.milestone-date {
+  position: relative;
+  z-index: 1;
+  color: #b19991;
+  font-family: var(--font-hand);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+}
+
+.future-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  align-items: start;
+  gap: 22px;
+}
+
+.future-side {
+  display: grid;
+  gap: 22px;
+}
+
+.future-card {
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 30px;
+  background: rgba(255, 253, 250, 0.8);
+  box-shadow: var(--shadow-small);
+}
+
+.future-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.future-card h3 {
+  margin: 9px 0 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+}
+
+.future-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--rose-deep);
+  background: linear-gradient(145deg, #fff2e5, #ffe1e8);
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+
+.wish-progress {
+  display: inline-flex;
+  min-height: 30px;
+  flex: 0 0 auto;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #a77572;
+  background: var(--pink-soft);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.wish-list {
+  display: grid;
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.wish-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border: 1px solid rgba(245, 227, 221, 0.9);
+  border-radius: 15px;
+  background: rgba(255, 249, 247, 0.8);
+  transition: background 0.24s ease, transform 0.24s ease;
+}
+
+.wish-item:hover {
+  background: white;
+  transform: translateX(2px);
+}
+
+.wish-item.done {
+  background: rgba(238, 247, 238, 0.72);
+}
+
+.wish-check {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #e9c7c4;
+  border-radius: 50%;
+  color: transparent;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.wish-item.done .wish-check {
+  border-color: var(--rose);
+  color: white;
+  background: var(--rose);
+}
+
+.wish-text {
+  flex: 1;
+  overflow-wrap: anywhere;
+  color: #755d57;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.wish-item.done .wish-text {
+  color: #a39189;
+  text-decoration: line-through;
+}
+
+.item-delete {
+  padding: 2px 3px;
+  border: 0;
+  color: #c9afa9;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.item-delete:hover {
+  color: var(--rose-deep);
+}
+
+.mini-add-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.mini-add-form input,
+.song-form input {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 13px;
+  border: 1px solid rgba(232, 205, 198, 0.9);
+  border-radius: 12px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.72);
+  font: 13px var(--font-body);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.mini-add-form input::placeholder,
+.song-form input::placeholder {
+  color: #bda59e;
+}
+
+.mini-add-form input:focus,
+.song-form input:focus {
+  border-color: rgba(255, 124, 159, 0.7);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 124, 159, 0.09);
+}
+
+.mini-add-form button,
+.song-form button {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: white;
+  background: linear-gradient(145deg, #ffa9c0, var(--rose));
+  box-shadow: 0 8px 17px rgba(255, 124, 159, 0.2);
+  cursor: pointer;
+  font-size: 21px;
+  line-height: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mini-add-form button:hover,
+.song-form button:hover {
+  box-shadow: 0 11px 22px rgba(255, 124, 159, 0.28);
+  transform: translateY(-2px);
+}
+
+.future-local-note {
+  margin: 10px 0 0;
+  color: #b19890;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.future-empty {
+  display: flex;
+  min-height: 100px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px dashed rgba(231, 185, 183, 0.75);
+  border-radius: 18px;
+  color: #af9189;
+  background: rgba(255, 246, 244, 0.45);
+  text-align: center;
+}
+
+.future-empty strong {
+  color: #9b746e;
+  font-family: var(--font-hand);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.future-empty small {
+  font-size: 11px;
+}
+
+.wish-map {
+  position: relative;
+  display: flex;
+  min-height: 215px;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 19px;
+  padding: 25px 21px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  border-radius: 23px;
+  background:
+    radial-gradient(circle at 18% 25%, rgba(255, 255, 255, 0.8), transparent 22%),
+    radial-gradient(circle at 80% 74%, rgba(255, 236, 212, 0.72), transparent 27%),
+    linear-gradient(145deg, rgba(235, 246, 242, 0.9), rgba(255, 245, 229, 0.72));
+}
+
+.wish-map::before {
+  position: absolute;
+  inset: 20px;
+  border: 2px dashed rgba(151, 184, 165, 0.36);
+  border-radius: 52% 46% 58% 42% / 45% 54% 46% 55%;
+  content: "";
+  transform: rotate(-5deg);
+}
+
+.wish-map::after {
+  position: absolute;
+  top: 16px;
+  right: 19px;
+  color: rgba(255, 165, 147, 0.5);
+  content: "✦";
+  font-size: 18px;
+}
+
+.map-pin {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 8px 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  background: rgba(255, 253, 250, 0.9);
+  box-shadow: 0 7px 16px rgba(133, 114, 99, 0.11);
+  font-size: 12px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.map-pin:hover {
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.map-pin.visited {
+  border-color: rgba(164, 197, 165, 0.8);
+  background: rgba(239, 249, 238, 0.94);
+}
+
+.pin-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  color: #846962;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.pin-dot {
+  color: var(--rose);
+  font-family: Georgia, serif;
+  font-size: 13px;
+}
+
+.map-pin.visited .pin-dot {
+  color: #6f9674;
+}
+
+.pin-delete {
+  padding: 0 1px 0 3px;
+  border: 0;
+  color: #c7aaa2;
+  background: none;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.pin-delete:hover {
+  color: var(--rose-deep);
+}
+
+.map-empty {
+  position: relative;
+  z-index: 1;
+  color: #99aaa1;
+  font-family: var(--font-hand);
+  font-size: 17px;
+}
+
+.song-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border: 1px solid rgba(245, 227, 221, 0.86);
+  border-radius: 14px;
+  background: rgba(255, 249, 247, 0.75);
+}
+
+.song-number {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--rose-deep);
+  background: #ffe7ed;
+  font-family: Georgia, serif;
+  font-size: 12px;
+}
+
+.song-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.song-title {
+  overflow: hidden;
+  color: #755d57;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.song-title a {
+  color: inherit;
+}
+
+.song-title a:hover {
+  color: var(--rose-deep);
+}
+
+.song-link {
+  overflow: hidden;
+  color: #b0968e;
+  font-size: 10.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.song-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.song-form-row {
+  display: flex;
+  gap: 8px;
+}
+
+.song-form-row input {
+  flex: 1;
+}
+
+.wish-check:focus-visible,
+.item-delete:focus-visible,
+.pin-toggle:focus-visible,
+.pin-delete:focus-visible,
+.mini-add-form button:focus-visible,
+.song-form button:focus-visible,
+.footer-share:focus-visible {
+  outline: 3px solid rgba(255, 124, 159, 0.35);
+  outline-offset: 3px;
+}
+
+.footer-share {
+  padding: 6px 12px;
+  border: 1px solid rgba(232, 201, 195, 0.9);
+  border-radius: 999px;
+  color: #a67e78;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  font-family: var(--font-hand);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.footer-share:hover {
+  color: var(--rose-deep);
+  background: white;
+}
+
+.share-card {
+  width: min(500px, 100%);
+  text-align: center;
+}
+
+.share-card > .eyebrow {
+  justify-content: center;
+}
+
+.share-card h3 {
+  text-align: center;
+}
+
+.share-card .upload-modal-sub {
+  text-align: center;
+}
+
+.share-qr-wrap {
+  display: inline-grid;
+  place-items: center;
+  margin: 2px auto 15px;
+  padding: 13px;
+  border: 1px solid rgba(238, 218, 210, 0.9);
+  border-radius: 25px;
+  background: white;
+  box-shadow: 0 12px 28px rgba(177, 113, 98, 0.11);
+}
+
+.share-qr-wrap img {
+  width: min(245px, 62vw);
+  height: auto;
+  border-radius: 12px;
+}
+
+.share-url {
+  margin: 0 auto;
+  padding: 10px 13px;
+  border: 1px dashed rgba(228, 193, 187, 0.85);
+  border-radius: 12px;
+  color: #8e6e67;
+  background: rgba(255, 255, 255, 0.48);
+  font-family: "Courier New", monospace;
+  font-size: 11.5px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.share-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.share-status {
+  min-height: 19px;
+  margin: 10px 0 0;
+  color: #9b7b74;
+  font-size: 12px;
+}
+
+@media (max-width: 880px) {
+  .future-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .future-side {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .milestone-bar {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .milestone-card {
+    padding: 18px 20px;
+  }
+
+  .milestone-days strong {
+    font-size: 39px;
+  }
+
+  .future-side {
+    grid-template-columns: 1fr;
+  }
+
+  .future-card {
+    padding: 23px 20px;
+    border-radius: 25px;
+  }
+
+  .future-card h3 {
+    font-size: 22px;
+  }
+
+  .wish-map {
+    min-height: 190px;
+  }
+
+  .share-actions {
+    flex-direction: column-reverse;
+  }
+
+  .share-actions .gallery-button {
+    width: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -2518,6 +3175,10 @@ main,
             </p>
           </div>
           <div class="gallery-toolbar">
+            <button class="gallery-button gallery-random" type="button" id="randomMemoryButton">
+              <span aria-hidden="true">✦</span>
+              随机回忆
+            </button>
             <button class="gallery-button gallery-sync" type="button" id="syncGallery">
               <span class="sync-icon" aria-hidden="true">↻</span>
               同步相册
@@ -2609,6 +3270,83 @@ main,
       </div>
     </section>
 
+    <section class="section future" id="future">
+      <header class="section-head reveal">
+        <div>
+          <div class="eyebrow left">OUR NEXT CHAPTER</div>
+          <h2>下一段故事</h2>
+        </div>
+        <p>把想做的事、想去的地方和循环播放的歌，都放进同一个未来里。</p>
+      </header>
+
+      <div class="milestone-bar reveal" id="milestoneBar" aria-label="纪念日倒计时"></div>
+
+      <div class="future-grid">
+        <article class="future-card wish-card reveal">
+          <div class="future-card-head">
+            <div>
+              <div class="eyebrow left">WISH LIST</div>
+              <h3>想和你一起完成</h3>
+            </div>
+            <span class="wish-progress" id="wishProgress">0 / 0</span>
+          </div>
+
+          <div class="wish-list" id="wishList"></div>
+
+          <form class="mini-add-form" id="wishForm">
+            <label class="sr-only" for="wishInput">添加一个新的愿望</label>
+            <input id="wishInput" type="text" maxlength="40" placeholder="写下一个愿望…">
+            <button type="submit" aria-label="添加愿望">＋</button>
+          </form>
+          <p class="future-local-note">愿望清单保存在当前浏览器里。</p>
+        </article>
+
+        <div class="future-side">
+          <article class="future-card map-card reveal">
+            <div class="future-card-head">
+              <div>
+                <div class="eyebrow left">TRAVEL WISHES</div>
+                <h3>想去的地方</h3>
+              </div>
+              <span class="future-icon" aria-hidden="true">✈</span>
+            </div>
+
+            <div class="wish-map" id="placeMap"></div>
+
+            <form class="mini-add-form" id="placeForm">
+              <label class="sr-only" for="placeInput">添加想去的地方</label>
+              <input id="placeInput" type="text" maxlength="24" placeholder="新的地方，比如：海边">
+              <button type="submit" aria-label="添加地点">＋</button>
+            </form>
+            <p class="future-local-note">点一下地点，就能标记成“去过”；清单保存在当前浏览器。</p>
+          </article>
+
+          <article class="future-card song-card reveal">
+            <div class="future-card-head">
+              <div>
+                <div class="eyebrow left">OUR PLAYLIST</div>
+                <h3>我们的歌单</h3>
+              </div>
+              <span class="future-icon" aria-hidden="true">♪</span>
+            </div>
+
+            <div class="song-list" id="songList"></div>
+
+            <form class="song-form" id="songForm">
+              <label class="sr-only" for="songTitleInput">歌曲名和歌手</label>
+              <input id="songTitleInput" type="text" maxlength="48" placeholder="歌名 - 歌手">
+              <div class="song-form-row">
+                <label class="sr-only" for="songUrlInput">音乐链接（可选）</label>
+                <input id="songUrlInput" type="url" maxlength="240" placeholder="音乐链接（可选）">
+                <button type="submit" aria-label="添加歌曲">＋</button>
+              </div>
+            </form>
+            <p class="future-local-note">只保存歌名和链接，不上传音乐文件；清单保存在当前浏览器。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section note" id="note">
       <div class="note-card reveal">
         <span class="note-doodle doodle-one" aria-hidden="true">♡</span>
@@ -2635,6 +3373,8 @@ main,
     <span>刘华伟 <b>♡</b> 路叶</span>
     <span class="footer-dot">·</span>
     <span>Since <span data-anniversary>2026.08.24</span></span>
+    <span class="footer-dot">·</span>
+    <button class="footer-share" id="openShareModal" type="button">分享小站 ↗</button>
   </footer>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="照片预览" aria-hidden="true">
@@ -2685,6 +3425,27 @@ main,
     </div>
   </div>
 
+  <div class="upload-modal share-modal" id="shareModal" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle" aria-hidden="true">
+    <div class="upload-modal-card share-card">
+      <button class="upload-modal-close" id="closeShareModal" type="button" aria-label="关闭分享窗口">×</button>
+      <div class="eyebrow">SHARE OUR LITTLE WORLD</div>
+      <h3 id="shareModalTitle">把小小宇宙分享出去</h3>
+      <p class="upload-modal-sub">扫一扫二维码，或把链接发给想分享的人。</p>
+
+      <div class="share-qr-wrap">
+        <img id="shareQr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAFoAQMAAABAK/OWAAAABlBMVEX/+vZfSkT87VgPAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB90lEQVR4nO2bPZKDMAyFxaSg5AgchaPB0fYoPgIlRQatZVn+SXbSZlZ+r8ERH1RvZMkiRBD0bT3Y9CSaOceO2WJ7uf8D2hl9qAW2dIfWGE5voOWW8H6ZQ0C7o5d47xaa5rQyZko+uUieDaBBG51cFVcsTuNzEgD0CHQUh8SQ7iSgQVeakjbNHYGsCjlT+MMuBfqf06ZMT1JxxFpTKo7tU2UKeiT6TUrn1V8AaB909kmqM0RhKj3onftSccz6BD04LRVHILtDVLoTthxzUt+7gvZAU+pEtPOU86qVTac912UU0H5oIqscku6cNSS+sZ5ZlgwBelT6IfbpTy3yG06jKScc0K7o7BO9zlZDSEz0vpOAHpWOXhI6Ooj1hGLTxKLMq6tAe6FTPmkmXWRdRvMuAZ6gB6cPuVhlarXHpZOPd1eB9kNLxVEnGDk8q2NyZpnqLAP0qHTjKtLMUucdOvMS2lwF2hG9cGWa80lqq5C6k4D2Q5N1o6QrKpXDVjIEN9/KgR6QbrXrtJP1rKLkGH0EtDO6m3Nz6UtrLH8Jo+8DPS596CLnk1BmIAubq7oJGWg/dPdNJdn3EM3s+6XWBD06fbVn21w2pqX8AO2UZgvv3dm2qOlgQI9Jq3Wyq/qpeOlTVtD+6OoEcUczFdf/ZejuEgj00DQEfVe/rvC+ZpVNDtkAAAAASUVORK5CYII=" alt="刘华伟和路叶的恋爱小站二维码" width="260" height="260">
+      </div>
+
+      <p class="share-url">https://lhw743.github.io/our-love-site/</p>
+
+      <div class="share-actions">
+        <button class="gallery-button" id="copyShareLink" type="button">复制链接</button>
+        <button class="gallery-button gallery-add" id="shareNative" type="button">分享给朋友</button>
+      </div>
+      <p class="share-status" id="shareStatus" aria-live="polite"></p>
+    </div>
+  </div>
+
   <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
 
   <script>
@@ -2709,6 +3470,7 @@ const GALLERY_MANIFEST_URL = `${GALLERY_RAW_BASE}/${GALLERY_MANIFEST_PATH}`;
 const GALLERY_STORAGE_KEY = 'coupleGalleryPhotosV1';
 const GALLERY_HIDDEN_KEY = 'coupleGalleryHiddenV1';
 const GALLERY_MAX_BYTES = 5 * 1024 * 1024;
+const SITE_URL = 'https://lhw743.github.io/our-love-site/';
 
 const anniversaryDate = '2026-08-24';
 const anniversary = new Date(`${anniversaryDate}T00:00:00+08:00`);
@@ -3735,6 +4497,473 @@ if ('IntersectionObserver' in window) {
 
   renderGallery(getVisiblePhotos());
   syncGallery({ silent: true });
+})();
+
+/* =========================================================================
+ * 未来清单：纪念日、愿望、地点、歌单与分享
+ * ========================================================================= */
+(() => {
+  const milestoneBar = document.querySelector('#milestoneBar');
+  const wishList = document.querySelector('#wishList');
+  const wishProgress = document.querySelector('#wishProgress');
+  const wishForm = document.querySelector('#wishForm');
+  const wishInput = document.querySelector('#wishInput');
+  const placeMap = document.querySelector('#placeMap');
+  const placeForm = document.querySelector('#placeForm');
+  const placeInput = document.querySelector('#placeInput');
+  const songList = document.querySelector('#songList');
+  const songForm = document.querySelector('#songForm');
+  const songTitleInput = document.querySelector('#songTitleInput');
+  const songUrlInput = document.querySelector('#songUrlInput');
+  const shareModal = document.querySelector('#shareModal');
+  const openShareButton = document.querySelector('#openShareModal');
+  const closeShareButton = document.querySelector('#closeShareModal');
+  const copyShareLinkButton = document.querySelector('#copyShareLink');
+  const shareNativeButton = document.querySelector('#shareNative');
+  const shareStatus = document.querySelector('#shareStatus');
+
+  if (!milestoneBar || !wishList || !placeMap || !songList) {
+    return;
+  }
+
+  const WISH_STORAGE_KEY = 'coupleWishlistV1';
+  const PLACE_STORAGE_KEY = 'couplePlacesV1';
+  const SONG_STORAGE_KEY = 'coupleSongsV1';
+
+  const defaultWishes = [
+    { id: 'wish-sea', text: '一起去看一次海', done: false },
+    { id: 'wish-wheel', text: '一起坐一次摩天轮', done: false },
+    { id: 'wish-photo', text: '一起拍一组照片', done: false },
+    { id: 'wish-full', text: '一起把这张清单填满', done: false }
+  ];
+
+  const defaultPlaces = [
+    { id: 'place-sea', name: '海边', visited: false },
+    { id: 'place-snow', name: '雪山', visited: false },
+    { id: 'place-park', name: '游乐园', visited: false }
+  ];
+
+  let wishes = loadOrInit(WISH_STORAGE_KEY, defaultWishes);
+  let places = loadOrInit(PLACE_STORAGE_KEY, defaultPlaces);
+  let songs = loadOrInit(SONG_STORAGE_KEY, []);
+
+  let shareReturnFocus = null;
+
+  function readStorage(key, fallback) {
+    try {
+      const raw = window.localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (error) {
+      console.warn(`无法读取 ${key}：`, error);
+      return fallback;
+    }
+  }
+
+  function writeStorage(key, value) {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (error) {
+      console.warn(`无法写入 ${key}：`, error);
+      return false;
+    }
+  }
+
+  function loadOrInit(key, defaults) {
+    const fallback = defaults.map((item) => ({ ...item }));
+    const stored = readStorage(key, fallback);
+    return Array.isArray(stored) ? stored : fallback;
+  }
+
+  function makeElement(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) {
+      element.className = className;
+    }
+    if (text !== undefined) {
+      element.textContent = text;
+    }
+    return element;
+  }
+
+  function makeId(prefix) {
+    return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  }
+
+  function renderMilestones() {
+    const dayMs = 86400000;
+    const elapsedDays = Math.max(
+      0,
+      Math.floor((Date.now() - anniversary.getTime()) / dayMs)
+    );
+    const milestones = [100, 200, 365, 500, 730, 1000, 1314, 1500, 2000, 3000, 3650, 5000, 7300];
+    const upcoming = milestones
+      .filter((days) => days >= elapsedDays)
+      .slice(0, 3);
+
+    milestoneBar.replaceChildren();
+
+    upcoming.forEach((days) => {
+      const remaining = Math.max(0, days - elapsedDays);
+      const milestoneDate = new Date(anniversary.getTime() + days * dayMs);
+      const dateText = milestoneDate
+        .toLocaleDateString('zh-CN', {
+          timeZone: 'Asia/Shanghai',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        })
+        .replaceAll('/', '.');
+
+      let label = `在一起 ${days} 天`;
+      if (days === 365) {
+        label = '在一起一周年';
+      } else if (days === 730) {
+        label = '在一起两周年';
+      } else if (days === 1000) {
+        label = '在一起一千天';
+      } else if (days === 1314) {
+        label = '一起走过 1314 天';
+      }
+
+      const card = makeElement('article', 'milestone-card');
+      card.append(
+        makeElement('span', 'milestone-label', label)
+      );
+
+      const daysRow = makeElement('div', 'milestone-days');
+      if (remaining === 0) {
+        daysRow.append(makeElement('strong', '', '今天'));
+      } else {
+        daysRow.append(
+          makeElement('strong', '', remaining.toLocaleString('zh-CN')),
+          makeElement('span', '', '天后')
+        );
+      }
+
+      card.append(daysRow, makeElement('span', 'milestone-date', dateText));
+      milestoneBar.appendChild(card);
+    });
+  }
+
+  function renderWishes() {
+    wishList.replaceChildren();
+    const doneCount = wishes.filter((wish) => wish.done).length;
+    wishProgress.textContent = `${doneCount} / ${wishes.length}`;
+
+    if (!wishes.length) {
+      const empty = makeElement('div', 'future-empty');
+      empty.append(
+        makeElement('strong', '', '还没有愿望'),
+        makeElement('small', '', '写下第一个想一起完成的事吧。')
+      );
+      wishList.appendChild(empty);
+      return;
+    }
+
+    wishes.forEach((wish) => {
+      const item = makeElement('div', `wish-item${wish.done ? ' done' : ''}`);
+      const check = makeElement('button', 'wish-check', '✓');
+      check.type = 'button';
+      check.setAttribute('aria-label', wish.done ? `把“${wish.text}”标记为未完成` : `把“${wish.text}”标记为完成`);
+      check.addEventListener('click', () => {
+        wish.done = !wish.done;
+        writeStorage(WISH_STORAGE_KEY, wishes);
+        renderWishes();
+      });
+
+      const text = makeElement('span', 'wish-text', wish.text);
+      const remove = makeElement('button', 'item-delete', '×');
+      remove.type = 'button';
+      remove.setAttribute('aria-label', `删除愿望：${wish.text}`);
+      remove.addEventListener('click', () => {
+        wishes = wishes.filter((itemWish) => itemWish.id !== wish.id);
+        writeStorage(WISH_STORAGE_KEY, wishes);
+        renderWishes();
+      });
+
+      item.append(check, text, remove);
+      wishList.appendChild(item);
+    });
+  }
+
+  function renderPlaces() {
+    placeMap.replaceChildren();
+
+    if (!places.length) {
+      placeMap.appendChild(makeElement('span', 'map-empty', '把第一个想去的地方钉上去吧'));
+      return;
+    }
+
+    places.forEach((place) => {
+      const pin = makeElement('div', `map-pin${place.visited ? ' visited' : ''}`);
+      const toggle = makeElement('button', 'pin-toggle');
+      toggle.type = 'button';
+      toggle.setAttribute('aria-label', place.visited ? `把“${place.name}”标记为还没去过` : `把“${place.name}”标记为去过`);
+      toggle.append(
+        makeElement('span', 'pin-dot', place.visited ? '✓' : '♡'),
+        makeElement('span', '', place.name)
+      );
+      toggle.addEventListener('click', () => {
+        place.visited = !place.visited;
+        writeStorage(PLACE_STORAGE_KEY, places);
+        renderPlaces();
+      });
+
+      const remove = makeElement('button', 'pin-delete', '×');
+      remove.type = 'button';
+      remove.setAttribute('aria-label', `删除地点：${place.name}`);
+      remove.addEventListener('click', () => {
+        places = places.filter((itemPlace) => itemPlace.id !== place.id);
+        writeStorage(PLACE_STORAGE_KEY, places);
+        renderPlaces();
+      });
+
+      pin.append(toggle, remove);
+      placeMap.appendChild(pin);
+    });
+  }
+
+  function renderSongs() {
+    songList.replaceChildren();
+
+    if (!songs.length) {
+      const empty = makeElement('div', 'future-empty');
+      empty.append(
+        makeElement('strong', '', '还没有第一首歌'),
+        makeElement('small', '', '把你们循环播放的歌加进来。')
+      );
+      songList.appendChild(empty);
+      return;
+    }
+
+    songs.forEach((song, index) => {
+      const item = makeElement('div', 'song-item');
+      const number = makeElement('span', 'song-number', String(index + 1).padStart(2, '0'));
+      const copy = makeElement('div', 'song-copy');
+      const title = makeElement('span', 'song-title', song.title);
+
+      if (song.url) {
+        const link = makeElement('a', 'song-link', '打开音乐链接');
+        link.href = song.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        copy.append(title, link);
+      } else {
+        copy.append(title);
+      }
+
+      const remove = makeElement('button', 'item-delete', '×');
+      remove.type = 'button';
+      remove.setAttribute('aria-label', `删除歌曲：${song.title}`);
+      remove.addEventListener('click', () => {
+        songs = songs.filter((itemSong) => itemSong.id !== song.id);
+        writeStorage(SONG_STORAGE_KEY, songs);
+        renderSongs();
+      });
+
+      item.append(number, copy, remove);
+      songList.appendChild(item);
+    });
+  }
+
+  wishForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const text = wishInput.value.trim().slice(0, 40);
+    if (!text) {
+      wishInput.focus();
+      return;
+    }
+    wishes.push({ id: makeId('wish'), text, done: false });
+    writeStorage(WISH_STORAGE_KEY, wishes);
+    wishInput.value = '';
+    renderWishes();
+    wishInput.focus();
+  });
+
+  placeForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = placeInput.value.trim().slice(0, 24);
+    if (!name) {
+      placeInput.focus();
+      return;
+    }
+    places.push({ id: makeId('place'), name, visited: false });
+    writeStorage(PLACE_STORAGE_KEY, places);
+    placeInput.value = '';
+    renderPlaces();
+    placeInput.focus();
+  });
+
+  songForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const title = songTitleInput.value.trim().slice(0, 48);
+    const rawUrl = songUrlInput.value.trim();
+
+    if (!title) {
+      songTitleInput.focus();
+      return;
+    }
+
+    let url = '';
+    if (rawUrl) {
+      try {
+        const parsed = new URL(rawUrl);
+        if (!['http:', 'https:'].includes(parsed.protocol)) {
+          throw new Error('unsupported protocol');
+        }
+        url = parsed.href;
+      } catch (error) {
+        songUrlInput.setCustomValidity('请输入完整的 http(s) 音乐链接。');
+        songUrlInput.reportValidity();
+        return;
+      }
+    }
+
+    songUrlInput.setCustomValidity('');
+    songs.push({ id: makeId('song'), title, url });
+    writeStorage(SONG_STORAGE_KEY, songs);
+    songForm.reset();
+    renderSongs();
+    songTitleInput.focus();
+  });
+
+  songUrlInput.addEventListener('input', () => {
+    songUrlInput.setCustomValidity('');
+  });
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+  }
+
+  function openShareModal() {
+    if (!shareModal) {
+      return;
+    }
+    shareReturnFocus = document.activeElement;
+    shareStatus.textContent = '';
+    shareModal.classList.add('open');
+    shareModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+    closeShareButton.focus();
+  }
+
+  function closeShareModal() {
+    if (!shareModal) {
+      return;
+    }
+    shareModal.classList.remove('open');
+    shareModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+    if (shareReturnFocus) {
+      shareReturnFocus.focus();
+    }
+  }
+
+  if (openShareButton && shareModal) {
+    openShareButton.addEventListener('click', openShareModal);
+    closeShareButton.addEventListener('click', closeShareModal);
+    shareModal.addEventListener('click', (event) => {
+      if (event.target === shareModal) {
+        closeShareModal();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && shareModal.classList.contains('open')) {
+        closeShareModal();
+      }
+    });
+  }
+
+  if (copyShareLinkButton) {
+    copyShareLinkButton.addEventListener('click', async () => {
+      try {
+        await copyText(SITE_URL);
+        shareStatus.textContent = '链接已经复制好了。';
+      } catch (error) {
+        shareStatus.textContent = '复制失败，可以手动选择上面的网址。';
+      }
+    });
+  }
+
+  if (shareNativeButton) {
+    shareNativeButton.addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: '刘华伟 ♡ 路叶的恋爱小站',
+            text: '来看看我们的恋爱小站。',
+            url: SITE_URL
+          });
+          shareStatus.textContent = '分享成功。';
+        } catch (error) {
+          if (error.name !== 'AbortError') {
+            shareStatus.textContent = '分享没有完成，可以试试复制链接。';
+          }
+        }
+        return;
+      }
+
+      try {
+        await copyText(SITE_URL);
+        shareStatus.textContent = '当前浏览器不支持直接分享，链接已经复制。';
+      } catch (error) {
+        shareStatus.textContent = '复制失败，可以手动选择上面的网址。';
+      }
+    });
+  }
+
+  renderMilestones();
+  renderWishes();
+  renderPlaces();
+  renderSongs();
+  window.setInterval(renderMilestones, 3600000);
+})();
+
+/* =========================================================================
+ * 随机回忆：从原有相册和新增相册里随机打开一张
+ * ========================================================================= */
+(() => {
+  const randomButton = document.querySelector('#randomMemoryButton');
+
+  if (!randomButton) {
+    return;
+  }
+
+  randomButton.addEventListener('click', () => {
+    const cards = [...document.querySelectorAll('.polaroid')]
+      .filter((card) => !card.classList.contains('p6'));
+
+    if (!cards.length) {
+      return;
+    }
+
+    const card = cards[Math.floor(Math.random() * cards.length)];
+    const image = card.querySelector('img');
+    const caption = card.dataset.caption || '我们的回忆';
+
+    if (!image) {
+      return;
+    }
+
+    openLightbox(image.currentSrc || image.src, caption);
+    const rect = randomButton.getBoundingClientRect();
+    burstHearts(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
+  });
 })();
 
 </script>
