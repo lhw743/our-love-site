@@ -1610,6 +1610,597 @@ main,
   }
 }
 
+/* ===== GitHub gallery upload ===== */
+.gallery-addon {
+  margin-top: 82px;
+  padding-top: 56px;
+  border-top: 1px dashed rgba(226, 174, 166, 0.62);
+}
+
+.gallery-addon-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.gallery-addon h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.4vw, 42px);
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+}
+
+.gallery-sub {
+  max-width: 540px;
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.gallery-toolbar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.gallery-button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 19px;
+  border: 1px solid rgba(236, 205, 200, 0.95);
+  border-radius: 999px;
+  color: var(--ink);
+  background: rgba(255, 253, 250, 0.82);
+  box-shadow: 0 8px 20px rgba(177, 113, 98, 0.08);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease, color 0.24s ease;
+}
+
+.gallery-button:hover {
+  background: white;
+  box-shadow: 0 12px 26px rgba(177, 113, 98, 0.14);
+  transform: translateY(-2px);
+}
+
+.gallery-button:focus-visible,
+.upload-modal-close:focus-visible,
+.gallery-delete:focus-visible {
+  outline: 3px solid rgba(255, 124, 159, 0.38);
+  outline-offset: 3px;
+}
+
+.gallery-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+}
+
+.gallery-add {
+  border-color: transparent;
+  color: white;
+  background: linear-gradient(135deg, #ff9eb7, var(--rose));
+  box-shadow: 0 11px 24px rgba(255, 124, 159, 0.24);
+}
+
+.gallery-add:hover {
+  color: white;
+  background: linear-gradient(135deg, #ffa9c0, var(--rose-deep));
+  box-shadow: 0 15px 30px rgba(255, 124, 159, 0.31);
+}
+
+.sync-icon {
+  display: inline-block;
+  color: var(--rose-deep);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.gallery-sync.is-loading .sync-icon {
+  animation: gallerySpin 0.85s linear infinite;
+}
+
+.gallery-status {
+  min-height: 22px;
+  margin: 14px 0 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.gallery-status.error {
+  color: #b7465d;
+}
+
+.gallery-status.success {
+  color: #748465;
+}
+
+.uploaded-gallery {
+  margin-top: 12px;
+  padding-top: 0;
+}
+
+.uploaded-gallery:empty {
+  display: none;
+}
+
+.gallery-empty {
+  display: flex;
+  min-height: 210px;
+  grid-column: 1 / -1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px dashed rgba(231, 173, 178, 0.75);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.75), transparent 38%),
+    rgba(255, 236, 239, 0.38);
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.gallery-empty strong {
+  color: #9b6e6b;
+  font-family: var(--font-hand);
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.gallery-empty small {
+  color: #b39891;
+  font-size: 12px;
+}
+
+.user-polaroid {
+  animation: userPolaroidIn 0.45s ease both;
+}
+
+.user-polaroid .photo {
+  background: #f6e8e4;
+}
+
+.user-polaroid figcaption {
+  gap: 12px;
+}
+
+.user-note {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.45;
+}
+
+.gallery-delete {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 4;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  color: var(--rose-deep);
+  background: rgba(255, 252, 249, 0.9);
+  box-shadow: 0 6px 15px rgba(127, 77, 76, 0.18);
+  cursor: pointer;
+  font-size: 19px;
+  line-height: 1;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.gallery-delete:hover {
+  color: white;
+  background: var(--rose-deep);
+  transform: scale(1.07);
+}
+
+@keyframes userPolaroidIn {
+  from { opacity: 0; translate: 0 18px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+.upload-hints {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 28px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 22px;
+  background: rgba(255, 253, 250, 0.58);
+  box-shadow: 0 12px 28px rgba(177, 113, 98, 0.06);
+}
+
+.upload-hints-icon {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  background: linear-gradient(145deg, #ffabc0, var(--rose));
+  font-family: Georgia, serif;
+  font-size: 19px;
+  box-shadow: 0 6px 14px rgba(255, 124, 159, 0.2);
+}
+
+.upload-hints ul {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.upload-hints li {
+  position: relative;
+  padding-left: 13px;
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.upload-hints li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--pink-mid);
+  content: "·";
+  font-weight: 700;
+}
+
+.upload-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(60, 43, 40, 0.58);
+  opacity: 0;
+  backdrop-filter: blur(12px);
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.upload-modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.upload-modal-card {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  padding: 34px 34px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.94);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.85), transparent 27%),
+    linear-gradient(145deg, #fff9f5, #ffe9ea 58%, #fff2dd);
+  box-shadow: 0 32px 80px rgba(58, 39, 36, 0.28);
+  transform: translateY(14px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.upload-modal.open .upload-modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.upload-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(224, 184, 180, 0.7);
+  border-radius: 50%;
+  color: #9b7770;
+  background: rgba(255, 255, 255, 0.62);
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.upload-modal-close:hover {
+  color: var(--rose-deep);
+  background: white;
+}
+
+.upload-modal-close:disabled {
+  cursor: wait;
+  opacity: 0.42;
+}
+
+.upload-modal-card > .eyebrow {
+  margin-bottom: 4px;
+}
+
+.upload-modal-card h3 {
+  margin: 9px 0 8px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.03em;
+}
+
+.upload-modal-sub {
+  margin: 0 0 22px;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  line-height: 1.75;
+}
+
+.upload-drop {
+  position: relative;
+  display: flex;
+  min-height: 178px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  padding: 18px;
+  border: 2px dashed rgba(231, 169, 175, 0.76);
+  border-radius: 23px;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.24s ease, background 0.24s ease, transform 0.24s ease;
+}
+
+.upload-drop:hover,
+.upload-drop.dragging {
+  border-color: var(--rose);
+  background: rgba(255, 255, 255, 0.82);
+  transform: translateY(-1px);
+}
+
+.upload-drop:focus-within {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 4px rgba(255, 124, 159, 0.12);
+}
+
+.upload-drop.has-file {
+  gap: 0;
+  padding: 12px;
+  border-style: solid;
+}
+
+.upload-drop input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.upload-preview {
+  width: 100%;
+  max-height: 215px;
+  margin: 0 0 12px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.upload-preview[hidden] {
+  display: none;
+}
+
+.upload-drop-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--rose-deep);
+  background: rgba(255, 235, 240, 0.95);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.upload-drop.has-file .upload-drop-icon {
+  display: none;
+}
+
+.upload-file-label {
+  max-width: 100%;
+  overflow: hidden;
+  color: #906c66;
+  font-family: var(--font-hand);
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-drop small {
+  color: #b39891;
+  font-size: 11.5px;
+}
+
+.upload-field-label {
+  display: block;
+  margin: 16px 2px 7px;
+  color: #80645e;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.upload-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 15px;
+  border: 1px solid rgba(232, 201, 195, 0.9);
+  border-radius: 14px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+  font: 14px var(--font-body);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.upload-input::placeholder {
+  color: #baa19a;
+}
+
+.upload-input:focus {
+  border-color: rgba(255, 124, 159, 0.72);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 124, 159, 0.1);
+}
+
+.upload-input:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.upload-token-field {
+  margin-top: 2px;
+}
+
+.upload-field-tip {
+  margin: 6px 2px 0;
+  color: #ac9189;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.upload-error {
+  min-height: 22px;
+  margin: 12px 0 0;
+  color: #bd4963;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.upload-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 13px;
+  color: #8d6b65;
+  font-size: 13px;
+}
+
+.upload-progress[hidden] {
+  display: none;
+}
+
+.upload-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 124, 159, 0.24);
+  border-top-color: var(--rose-deep);
+  border-radius: 50%;
+  animation: gallerySpin 0.8s linear infinite;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-actions .gallery-button {
+  min-width: 112px;
+}
+
+@keyframes gallerySpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 880px) {
+  .gallery-addon-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 620px) {
+  .gallery-addon {
+    margin-top: 62px;
+    padding-top: 43px;
+  }
+
+  .gallery-toolbar {
+    width: 100%;
+  }
+
+  .gallery-toolbar .gallery-button {
+    flex: 1;
+  }
+
+  .gallery-empty {
+    min-height: 175px;
+  }
+
+  .upload-hints {
+    padding: 17px 18px;
+  }
+
+  .upload-hints li {
+    font-size: 12px;
+  }
+
+  .upload-modal {
+    padding: 14px;
+  }
+
+  .upload-modal-card {
+    max-height: 94vh;
+    padding: 29px 20px 24px;
+    border-radius: 27px;
+  }
+
+  .upload-modal-card h3 {
+    padding-right: 28px;
+    font-size: 26px;
+  }
+
+  .upload-drop {
+    min-height: 160px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions .gallery-button {
+    width: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1916,6 +2507,40 @@ main,
       <p class="photo-hint reveal">
         五张照片，五段想收藏的回忆。下一格，留给我们的下一次出发。
       </p>
+
+      <div class="gallery-addon reveal" id="new-memories">
+        <div class="gallery-addon-head">
+          <div>
+            <div class="eyebrow left">NEW MEMORIES</div>
+            <h3>我们的新回忆</h3>
+            <p class="gallery-sub">
+              上传后会写进 GitHub 仓库，其他设备点“同步相册”也能看到。
+            </p>
+          </div>
+          <div class="gallery-toolbar">
+            <button class="gallery-button gallery-sync" type="button" id="syncGallery">
+              <span class="sync-icon" aria-hidden="true">↻</span>
+              同步相册
+            </button>
+            <button class="gallery-button gallery-add" type="button" id="openUploadModal">
+              <span aria-hidden="true">＋</span>
+              添加照片
+            </button>
+          </div>
+        </div>
+
+        <p class="gallery-status" id="galleryStatus" role="status" aria-live="polite"></p>
+        <div class="photo-grid uploaded-gallery" id="uploadedGallery" aria-live="polite"></div>
+
+        <div class="upload-hints">
+          <span class="upload-hints-icon" aria-hidden="true">♡</span>
+          <ul>
+            <li>上传会在 GitHub 生成一条提交记录，照片上传后公开可见。</li>
+            <li>令牌存在前端，不要把带令牌的网站随意分享给陌生人。</li>
+            <li>建议单张照片小于 5MB，加载会更快。</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section class="section timeline" id="timeline">
@@ -2020,9 +2645,71 @@ main,
     </figure>
   </div>
 
+  <div class="upload-modal" id="uploadModal" role="dialog" aria-modal="true" aria-labelledby="uploadModalTitle" aria-hidden="true">
+    <div class="upload-modal-card">
+      <button class="upload-modal-close" id="closeUploadModal" type="button" aria-label="关闭上传窗口">×</button>
+      <div class="eyebrow">NEW MEMORY</div>
+      <h3 id="uploadModalTitle">添加一张新照片</h3>
+      <p class="upload-modal-sub">上传后会生成 GitHub 提交记录，照片将公开可见。</p>
+
+      <form id="uploadForm" novalidate>
+        <label class="upload-drop" id="uploadDrop" for="galleryFile">
+          <input id="galleryFile" type="file" accept="image/jpeg,image/png,image/webp">
+          <img class="upload-preview" id="uploadPreview" alt="待上传照片预览" hidden>
+          <span class="upload-drop-icon" aria-hidden="true">＋</span>
+          <span class="upload-file-label" id="uploadFileLabel">选择一张本地照片</span>
+          <small>JPG / PNG / WebP · 建议小于 5MB</small>
+        </label>
+
+        <label class="upload-field-label" for="galleryNote">写一句备注</label>
+        <input class="upload-input" id="galleryNote" type="text" maxlength="60" placeholder="比如：今天一起看日落">
+
+        <div class="upload-token-field" id="tokenFieldWrap">
+          <label class="upload-field-label" for="galleryToken">GitHub Token</label>
+          <input class="upload-input" id="galleryToken" type="password" autocomplete="off" spellcheck="false" placeholder="仅本次上传使用">
+          <p class="upload-field-tip">令牌只保留在当前页面内存中，不会存入 localStorage。</p>
+        </div>
+
+        <p class="upload-error" id="uploadError" role="alert"></p>
+
+        <div class="upload-progress" id="uploadProgress" hidden>
+          <span class="upload-spinner" aria-hidden="true"></span>
+          <span id="uploadProgressText">正在上传到 GitHub…</span>
+        </div>
+
+        <div class="modal-actions">
+          <button class="gallery-button" id="cancelUpload" type="button">取消</button>
+          <button class="gallery-button gallery-add" id="submitUpload" type="submit">上传照片</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
 
   <script>
+/* =========================================================================
+ * GitHub 相册配置区
+ * -------------------------------------------------------------------------
+ * 注意：把真实令牌写进前端代码后，任何能打开网站的人都有机会读取它。
+ * 更安全的做法是保持 GITHUB_TOKEN 为空，在上传弹窗里临时输入。
+ * 令牌建议使用 Fine-grained token，只授权当前仓库的 Contents: Read and write。
+ * ========================================================================= */
+const GITHUB_TOKEN = '';
+const GITHUB_OWNER = 'lhw743';
+const GITHUB_REPO = 'our-love-site';
+const GITHUB_BRANCH = 'main';
+const GALLERY_PATH = 'gallery';
+
+const GITHUB_REPO_API = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`;
+const GALLERY_MANIFEST_PATH = `${GALLERY_PATH}/index.json`;
+const GALLERY_CDN_BASE = `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${GITHUB_REPO}@${GITHUB_BRANCH}/${GALLERY_PATH}`;
+const GALLERY_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}`;
+const GALLERY_MANIFEST_URL = `${GALLERY_RAW_BASE}/${GALLERY_MANIFEST_PATH}`;
+const GALLERY_STORAGE_KEY = 'coupleGalleryPhotosV1';
+const GALLERY_HIDDEN_KEY = 'coupleGalleryHiddenV1';
+const GALLERY_MAX_BYTES = 5 * 1024 * 1024;
+
 const anniversaryDate = '2026-08-24';
 const anniversary = new Date(`${anniversaryDate}T00:00:00+08:00`);
 const anniversaryText = anniversaryDate.split('-').join('.');
@@ -2216,6 +2903,839 @@ if ('IntersectionObserver' in window) {
 } else {
   revealItems.forEach((item) => item.classList.add('in-view'));
 }
+
+/* =========================================================================
+ * GitHub 相册：上传、同步、本地删除、CDN 预览
+ * ========================================================================= */
+(() => {
+  const openUploadButton = document.querySelector('#openUploadModal');
+  const syncButton = document.querySelector('#syncGallery');
+  const galleryStatus = document.querySelector('#galleryStatus');
+  const uploadedGallery = document.querySelector('#uploadedGallery');
+  const uploadModal = document.querySelector('#uploadModal');
+  const uploadForm = document.querySelector('#uploadForm');
+  const uploadDrop = document.querySelector('#uploadDrop');
+  const galleryFile = document.querySelector('#galleryFile');
+  const uploadPreview = document.querySelector('#uploadPreview');
+  const uploadFileLabel = document.querySelector('#uploadFileLabel');
+  const galleryNote = document.querySelector('#galleryNote');
+  const galleryToken = document.querySelector('#galleryToken');
+  const tokenFieldWrap = document.querySelector('#tokenFieldWrap');
+  const uploadError = document.querySelector('#uploadError');
+  const uploadProgress = document.querySelector('#uploadProgress');
+  const uploadProgressText = document.querySelector('#uploadProgressText');
+  const submitUpload = document.querySelector('#submitUpload');
+  const cancelUpload = document.querySelector('#cancelUpload');
+  const closeUploadModalButton = document.querySelector('#closeUploadModal');
+
+  if (!openUploadButton || !uploadModal || !uploadedGallery) {
+    return;
+  }
+
+  const allowedMimeTypes = new Set(['image/jpeg', 'image/png', 'image/webp']);
+  const allowedExtensions = new Set(['jpg', 'jpeg', 'png', 'webp']);
+  const extensionByMime = {
+    'image/jpeg': 'jpg',
+    'image/png': 'png',
+    'image/webp': 'webp'
+  };
+
+  let selectedFile = null;
+  let previewObjectUrl = null;
+  let modalReturnFocus = null;
+  let isUploading = false;
+  let remotePhotos = [];
+  let storedPhotos = loadStoredPhotos();
+  let hiddenIds = loadHiddenIds();
+
+  function readStorage(key, fallback) {
+    try {
+      const raw = window.localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (error) {
+      console.warn('无法读取本地相册缓存：', error);
+      return fallback;
+    }
+  }
+
+  function writeStorage(key, value) {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (error) {
+      console.warn('无法写入本地相册缓存：', error);
+      return false;
+    }
+  }
+
+  function buildCdnUrl(fileName) {
+    return `${GALLERY_CDN_BASE}/${encodeURIComponent(fileName)}`;
+  }
+
+  function buildRawUrl(path) {
+    const safePath = String(path || '')
+      .split('/')
+      .filter(Boolean)
+      .map((part) => encodeURIComponent(part))
+      .join('/');
+    return `${GALLERY_RAW_BASE}/${safePath}`;
+  }
+
+  function isAllowedGalleryUrl(url) {
+    return typeof url === 'string' && url.startsWith(`${GALLERY_CDN_BASE}/`);
+  }
+
+  function normalizePhoto(rawPhoto) {
+    if (!rawPhoto || typeof rawPhoto !== 'object') {
+      return null;
+    }
+
+    const rawPath = typeof rawPhoto.path === 'string' ? rawPhoto.path.replace(/^\/+/, '') : '';
+    const fileNameFromPath = rawPath.split('/').filter(Boolean).pop() || '';
+    const rawUrl = typeof rawPhoto.url === 'string' ? rawPhoto.url : '';
+    const url = rawUrl || (fileNameFromPath ? buildCdnUrl(fileNameFromPath) : '');
+
+    if (!isAllowedGalleryUrl(url)) {
+      return null;
+    }
+
+    let fileName = '';
+    try {
+      fileName = decodeURIComponent(url.split('/').filter(Boolean).pop() || '');
+    } catch (error) {
+      fileName = fileNameFromPath;
+    }
+
+    const id = String(rawPhoto.id || fileNameFromPath || fileName || '').trim();
+    if (!id) {
+      return null;
+    }
+
+    const note = typeof rawPhoto.note === 'string' ? rawPhoto.note.slice(0, 80) : '';
+    const createdAt = rawPhoto.createdAt && !Number.isNaN(Date.parse(rawPhoto.createdAt))
+      ? rawPhoto.createdAt
+      : null;
+
+    return {
+      id,
+      url,
+      note,
+      path: rawPath || `${GALLERY_PATH}/${fileName || id}`,
+      createdAt
+    };
+  }
+
+  function mergePhotoLists(...lists) {
+    const map = new Map();
+    lists.forEach((list) => {
+      if (!Array.isArray(list)) {
+        return;
+      }
+      list.forEach((item) => {
+        const photo = normalizePhoto(item);
+        if (photo) {
+          map.set(photo.id, photo);
+        }
+      });
+    });
+
+    return [...map.values()].sort((a, b) => {
+      const aTime = a.createdAt ? Date.parse(a.createdAt) : 0;
+      const bTime = b.createdAt ? Date.parse(b.createdAt) : 0;
+      return bTime - aTime;
+    });
+  }
+
+  function loadStoredPhotos() {
+    const stored = readStorage(GALLERY_STORAGE_KEY, []);
+    return Array.isArray(stored) ? mergePhotoLists(stored) : [];
+  }
+
+  function loadHiddenIds() {
+    const stored = readStorage(GALLERY_HIDDEN_KEY, []);
+    return new Set(Array.isArray(stored) ? stored.map(String) : []);
+  }
+
+  function saveStoredPhotos(photos) {
+    storedPhotos = mergePhotoLists(photos);
+    writeStorage(GALLERY_STORAGE_KEY, storedPhotos);
+  }
+
+  function saveHiddenIds() {
+    writeStorage(GALLERY_HIDDEN_KEY, [...hiddenIds]);
+  }
+
+  function getVisiblePhotos() {
+    return mergePhotoLists(remotePhotos, storedPhotos)
+      .filter((photo) => !hiddenIds.has(photo.id));
+  }
+
+  function setGalleryStatus(message, type = '') {
+    if (!galleryStatus) {
+      return;
+    }
+    galleryStatus.textContent = message;
+    galleryStatus.className = `gallery-status${type ? ` ${type}` : ''}`;
+  }
+
+  function renderGallery(photos) {
+    uploadedGallery.replaceChildren();
+
+    if (!photos.length) {
+      const empty = document.createElement('div');
+      empty.className = 'gallery-empty';
+
+      const title = document.createElement('strong');
+      title.textContent = '还没有新的回忆';
+
+      const hint = document.createElement('small');
+      hint.textContent = '点上面的「添加照片」，把今天也收藏起来。';
+
+      empty.append(title, hint);
+      uploadedGallery.appendChild(empty);
+      return;
+    }
+
+    photos.forEach((photo, index) => {
+      const note = photo.note || '新的回忆';
+      const card = document.createElement('figure');
+      const rotations = ['-1.4deg', '1.2deg', '-0.8deg', '1.6deg'];
+      card.className = 'polaroid user-polaroid';
+      card.style.setProperty('--rotate', rotations[index % rotations.length]);
+      card.dataset.photoId = photo.id;
+      card.dataset.caption = note;
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `查看照片：${note}`);
+
+      const photoWrap = document.createElement('div');
+      photoWrap.className = 'photo';
+
+      const image = document.createElement('img');
+      image.alt = `相册照片：${note}`;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+
+      const fallback = document.createElement('div');
+      fallback.className = 'photo-fallback';
+
+      const emoji = document.createElement('span');
+      emoji.className = 'fallback-emoji';
+      emoji.textContent = '📷';
+
+      const fallbackTitle = document.createElement('strong');
+      fallbackTitle.textContent = '照片加载中';
+
+      const fallbackHint = document.createElement('small');
+      fallbackHint.textContent = 'GitHub 相册';
+
+      fallback.append(emoji, fallbackTitle, fallbackHint);
+      photoWrap.append(image, fallback);
+
+      let triedRawUrl = false;
+      image.addEventListener('load', () => {
+        photoWrap.classList.add('is-loaded');
+        image.style.removeProperty('display');
+      });
+      image.addEventListener('error', () => {
+        if (!triedRawUrl) {
+          triedRawUrl = true;
+          image.src = buildRawUrl(photo.path);
+          return;
+        }
+        photoWrap.classList.remove('is-loaded');
+        fallbackTitle.textContent = '照片暂时加载失败';
+        fallbackHint.textContent = '稍后点「同步相册」重试';
+      });
+      image.src = photo.url;
+
+      const deleteButton = document.createElement('button');
+      deleteButton.className = 'gallery-delete';
+      deleteButton.type = 'button';
+      deleteButton.textContent = '×';
+      deleteButton.title = '仅从当前设备移除，GitHub 原图保留';
+      deleteButton.setAttribute('aria-label', `从当前设备移除：${note}`);
+      deleteButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        removePhotoLocally(photo.id);
+      });
+
+      const caption = document.createElement('figcaption');
+      const noteText = document.createElement('span');
+      noteText.className = 'user-note';
+      noteText.textContent = note;
+
+      const heart = document.createElement('span');
+      heart.textContent = '♡';
+
+      caption.append(noteText, heart);
+
+      const tape = document.createElement('span');
+      tape.className = 'tape';
+
+      card.append(photoWrap, deleteButton, caption, tape);
+      uploadedGallery.appendChild(card);
+
+      const openCardLightbox = () => {
+        const activeImageUrl = image.currentSrc || image.src || photo.url;
+        openLightbox(activeImageUrl, note);
+      };
+
+      card.addEventListener('click', openCardLightbox);
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openCardLightbox();
+        }
+      });
+    });
+  }
+
+  function removePhotoLocally(photoId) {
+    hiddenIds.add(photoId);
+    saveHiddenIds();
+    saveStoredPhotos(storedPhotos.filter((photo) => photo.id !== photoId));
+    renderGallery(getVisiblePhotos());
+    setGalleryStatus('已从当前设备移除；GitHub 上的原图仍然保留。', 'success');
+  }
+
+  function fetchWithTimeout(url, options = {}, timeoutMs = 30000) {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+
+    return window.fetch(url, { ...options, signal: controller.signal })
+      .finally(() => window.clearTimeout(timer));
+  }
+
+  async function responseError(response) {
+    let data = null;
+    try {
+      data = await response.clone().json();
+    } catch (error) {
+      data = null;
+    }
+
+    const error = new Error(
+      (data && data.message) || `GitHub 请求失败（HTTP ${response.status}）`
+    );
+    error.status = response.status;
+    error.rateLimited = (response.status === 403 || response.status === 429)
+      && response.headers.get('x-ratelimit-remaining') === '0';
+    return error;
+  }
+
+  function friendlyError(error) {
+    if (error && error.name === 'AbortError') {
+      return '请求超时了，请检查网络后再试一次。';
+    }
+    if (error && error.rateLimited) {
+      return 'GitHub 请求太频繁，已经触发频率限制，请稍后再试。';
+    }
+    if (error && error.status === 401) {
+      return 'GitHub Token 无效或已经过期，请重新生成后再试。';
+    }
+    if (error && error.status === 403) {
+      return 'Token 没有当前仓库的 Contents 读写权限，或请求被 GitHub 限制。';
+    }
+    if (error && error.status === 404) {
+      return '找不到仓库或分支，请检查配置区里的 owner、repo 和 branch。';
+    }
+    if (error && error.status === 409) {
+      return '相册索引刚刚被其他设备更新，请再试一次。';
+    }
+    if (error && error.status === 422) {
+      return 'GitHub 无法接受这次提交，请检查图片格式或稍后重试。';
+    }
+    if (error instanceof TypeError || /failed to fetch|networkerror|load failed/i.test(error?.message || '')) {
+      return '网络连接失败，请检查网络后再试。';
+    }
+    return (error && error.message) || '操作失败，请稍后再试。';
+  }
+
+  function apiHeaders(token) {
+    return {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${token}`,
+      'X-GitHub-Api-Version': '2022-11-28'
+    };
+  }
+
+  function encodePath(path) {
+    return String(path)
+      .split('/')
+      .map((part) => encodeURIComponent(part))
+      .join('/');
+  }
+
+  function utf8ToBase64(text) {
+    const bytes = new TextEncoder().encode(text);
+    let binary = '';
+    const chunkSize = 0x8000;
+
+    for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+      binary += String.fromCharCode(...bytes.subarray(offset, offset + chunkSize));
+    }
+
+    return btoa(binary);
+  }
+
+  function base64ToUtf8(value) {
+    const binary = atob(String(value || '').replace(/\s/g, ''));
+    const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+  }
+
+  async function fetchRemoteGallery(manual = false) {
+    const manifestUrl = `${GALLERY_MANIFEST_URL}?t=${Date.now()}`;
+    const response = await fetchWithTimeout(manifestUrl, { cache: 'no-store' });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (!data || !Array.isArray(data.photos)) {
+        return [];
+      }
+      return data.photos.map(normalizePhoto).filter(Boolean);
+    }
+
+    if (response.status === 404) {
+      return manual ? fetchGalleryDirectory() : [];
+    }
+
+    throw await responseError(response);
+  }
+
+  async function fetchGalleryDirectory() {
+    const url = `${GITHUB_REPO_API}/contents/${encodePath(GALLERY_PATH)}?ref=${encodeURIComponent(GITHUB_BRANCH)}&t=${Date.now()}`;
+    const response = await fetchWithTimeout(url, {
+      cache: 'no-store',
+      headers: { Accept: 'application/vnd.github+json' }
+    });
+
+    if (response.status === 404) {
+      return [];
+    }
+    if (!response.ok) {
+      throw await responseError(response);
+    }
+
+    const entries = await response.json();
+    if (!Array.isArray(entries)) {
+      return [];
+    }
+
+    return entries
+      .filter((entry) => entry.type === 'file' && /\.(jpe?g|png|webp)$/i.test(entry.name))
+      .map((entry) => ({
+        id: entry.name,
+        url: buildCdnUrl(entry.name),
+        note: '',
+        path: `${GALLERY_PATH}/${entry.name}`,
+        createdAt: null
+      }));
+  }
+
+  async function syncGallery({ silent = false } = {}) {
+    if (syncButton) {
+      syncButton.disabled = true;
+      syncButton.classList.add('is-loading');
+    }
+    if (!silent) {
+      setGalleryStatus('正在从 GitHub 同步相册…');
+    }
+
+    try {
+      const fetchedPhotos = await fetchRemoteGallery(!silent);
+      remotePhotos = fetchedPhotos;
+      saveStoredPhotos(mergePhotoLists(remotePhotos, storedPhotos));
+      const visiblePhotos = getVisiblePhotos();
+      renderGallery(visiblePhotos);
+
+      if (!silent) {
+        setGalleryStatus(`同步完成，当前有 ${visiblePhotos.length} 张新回忆。`, 'success');
+      } else if (visiblePhotos.length) {
+        setGalleryStatus(`已同步 ${visiblePhotos.length} 张新回忆。`, 'success');
+      }
+    } catch (error) {
+      renderGallery(getVisiblePhotos());
+      if (!silent) {
+        setGalleryStatus(friendlyError(error), 'error');
+      }
+    } finally {
+      if (syncButton) {
+        syncButton.disabled = false;
+        syncButton.classList.remove('is-loading');
+      }
+    }
+  }
+
+  function fileToDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(new Error('无法读取这张照片。'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes < 1024 * 1024) {
+      return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+    }
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  }
+
+  function clearUploadError() {
+    if (uploadError) {
+      uploadError.textContent = '';
+    }
+  }
+
+  function showUploadError(message) {
+    if (uploadError) {
+      uploadError.textContent = message;
+      uploadError.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }
+
+  function resetSelectedFile() {
+    selectedFile = null;
+    galleryFile.value = '';
+    uploadDrop.classList.remove('has-file');
+    uploadFileLabel.textContent = '选择一张本地照片';
+    uploadPreview.hidden = true;
+    uploadPreview.removeAttribute('src');
+
+    if (previewObjectUrl) {
+      URL.revokeObjectURL(previewObjectUrl);
+      previewObjectUrl = null;
+    }
+  }
+
+  function selectFile(file) {
+    clearUploadError();
+
+    if (!file) {
+      resetSelectedFile();
+      return;
+    }
+
+    const extension = String(file.name || '').split('.').pop().toLowerCase();
+    const typeAllowed = (file.type && allowedMimeTypes.has(file.type))
+      || allowedExtensions.has(extension);
+
+    if (!typeAllowed) {
+      resetSelectedFile();
+      showUploadError('请选择 JPG、PNG 或 WebP 格式的照片。');
+      return;
+    }
+
+    if (!file.size) {
+      resetSelectedFile();
+      showUploadError('这张照片是空文件，请换一张试试。');
+      return;
+    }
+
+    if (file.size > GALLERY_MAX_BYTES) {
+      resetSelectedFile();
+      showUploadError(
+        `这张照片有 ${formatFileSize(file.size)}，超过 5MB，请压缩后再上传。`
+      );
+      return;
+    }
+
+    selectedFile = file;
+
+    if (previewObjectUrl) {
+      URL.revokeObjectURL(previewObjectUrl);
+    }
+    previewObjectUrl = URL.createObjectURL(file);
+    uploadPreview.src = previewObjectUrl;
+    uploadPreview.hidden = false;
+    uploadDrop.classList.add('has-file');
+    uploadFileLabel.textContent = `${file.name} · ${formatFileSize(file.size)}`;
+  }
+
+  function createFileName(file) {
+    const extension = extensionByMime[file.type]
+      || String(file.name.split('.').pop() || 'jpg').toLowerCase().replace('jpeg', 'jpg');
+    const timestamp = new Date().toISOString().replace(/\D/g, '').slice(0, 14);
+    const random = Math.random().toString(36).slice(2, 8);
+    return `photo-${timestamp}-${random}.${extension}`;
+  }
+
+  async function uploadImageToGitHub(file, fileName, token) {
+    const dataUrl = await fileToDataUrl(file);
+    const content = dataUrl.split(',')[1];
+
+    if (!content) {
+      throw new Error('读取图片内容失败，请重新选择照片。');
+    }
+
+    const path = `${GALLERY_PATH}/${fileName}`;
+    const response = await fetchWithTimeout(
+      `${GITHUB_REPO_API}/contents/${encodePath(path)}`,
+      {
+        method: 'PUT',
+        headers: {
+          ...apiHeaders(token),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: `Add gallery photo ${fileName} via website`,
+          content,
+          branch: GITHUB_BRANCH
+        })
+      },
+      60000
+    );
+
+    if (!response.ok) {
+      throw await responseError(response);
+    }
+  }
+
+  async function fetchManifestForWrite(token) {
+    const url = `${GITHUB_REPO_API}/contents/${encodePath(GALLERY_MANIFEST_PATH)}?ref=${encodeURIComponent(GITHUB_BRANCH)}`;
+    const response = await fetchWithTimeout(url, {
+      headers: apiHeaders(token),
+      cache: 'no-store'
+    });
+
+    if (response.status === 404) {
+      return { photos: [], sha: null };
+    }
+    if (!response.ok) {
+      throw await responseError(response);
+    }
+
+    const data = await response.json();
+    let photos = [];
+
+    if (data.content) {
+      try {
+        const parsed = JSON.parse(base64ToUtf8(data.content));
+        photos = Array.isArray(parsed.photos) ? parsed.photos : [];
+      } catch (error) {
+        throw new Error('相册索引文件格式异常，暂时无法写入新备注。');
+      }
+    }
+
+    return { photos, sha: data.sha || null };
+  }
+
+  async function appendPhotoToManifest(photo, token) {
+    let lastError = null;
+
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      const manifest = await fetchManifestForWrite(token);
+      const photos = manifest.photos.filter((item) => item && item.id !== photo.id);
+      photos.push(photo);
+
+      const content = utf8ToBase64(JSON.stringify({
+        version: 1,
+        updatedAt: new Date().toISOString(),
+        photos
+      }, null, 2));
+
+      const body = {
+        message: `Update gallery index for ${photo.id}`,
+        content,
+        branch: GITHUB_BRANCH
+      };
+
+      if (manifest.sha) {
+        body.sha = manifest.sha;
+      }
+
+      const response = await fetchWithTimeout(
+        `${GITHUB_REPO_API}/contents/${encodePath(GALLERY_MANIFEST_PATH)}`,
+        {
+          method: 'PUT',
+          headers: {
+            ...apiHeaders(token),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        }
+      );
+
+      if (response.ok) {
+        return;
+      }
+
+      lastError = await responseError(response);
+      if ((lastError.status === 409 || lastError.status === 422) && attempt === 0) {
+        continue;
+      }
+      throw lastError;
+    }
+
+    throw lastError || new Error('相册索引同步失败。');
+  }
+
+  function setUploadBusy(busy) {
+    isUploading = busy;
+    [galleryFile, galleryNote, galleryToken, submitUpload, cancelUpload, closeUploadModalButton]
+      .forEach((element) => {
+        if (element) {
+          element.disabled = busy;
+        }
+      });
+
+    submitUpload.textContent = busy ? '正在上传…' : '上传照片';
+    uploadProgress.hidden = !busy;
+    uploadModal.querySelector('.upload-modal-card').setAttribute('aria-busy', String(busy));
+  }
+
+  function resetUploadForm() {
+    uploadForm.reset();
+    clearUploadError();
+    resetSelectedFile();
+    uploadDrop.classList.remove('dragging');
+    uploadProgress.hidden = true;
+    submitUpload.textContent = '上传照片';
+    uploadProgressText.textContent = '正在上传到 GitHub…';
+  }
+
+  function openUploadModal() {
+    modalReturnFocus = document.activeElement;
+    resetUploadForm();
+    tokenFieldWrap.hidden = Boolean(GITHUB_TOKEN.trim());
+    uploadModal.classList.add('open');
+    uploadModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('no-scroll');
+    closeUploadModalButton.focus();
+  }
+
+  function closeUploadModal() {
+    if (isUploading) {
+      return;
+    }
+
+    uploadModal.classList.remove('open');
+    uploadModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+    galleryToken.value = '';
+    resetUploadForm();
+
+    if (modalReturnFocus) {
+      modalReturnFocus.focus();
+    }
+  }
+
+  openUploadButton.addEventListener('click', openUploadModal);
+  syncButton?.addEventListener('click', () => syncGallery({ silent: false }));
+  closeUploadModalButton.addEventListener('click', closeUploadModal);
+  cancelUpload.addEventListener('click', closeUploadModal);
+
+  uploadModal.addEventListener('click', (event) => {
+    if (event.target === uploadModal) {
+      closeUploadModal();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && uploadModal.classList.contains('open')) {
+      closeUploadModal();
+    }
+  });
+
+  galleryFile.addEventListener('change', () => {
+    selectFile(galleryFile.files && galleryFile.files[0]);
+  });
+
+  ['dragenter', 'dragover'].forEach((eventName) => {
+    uploadDrop.addEventListener(eventName, (event) => {
+      event.preventDefault();
+      uploadDrop.classList.add('dragging');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach((eventName) => {
+    uploadDrop.addEventListener(eventName, (event) => {
+      event.preventDefault();
+      uploadDrop.classList.remove('dragging');
+    });
+  });
+
+  uploadDrop.addEventListener('drop', (event) => {
+    const file = event.dataTransfer && event.dataTransfer.files
+      ? event.dataTransfer.files[0]
+      : null;
+    selectFile(file);
+  });
+
+  uploadForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (isUploading) {
+      return;
+    }
+
+    clearUploadError();
+
+    if (!selectedFile) {
+      showUploadError('请先选择一张照片。');
+      return;
+    }
+
+    const token = (GITHUB_TOKEN || galleryToken.value).trim();
+    if (!token) {
+      showUploadError('还需要 GitHub Token 才能上传。可以填在配置区，或在这里临时输入。');
+      galleryToken.focus();
+      return;
+    }
+
+    const note = galleryNote.value.trim().slice(0, 60) || '新的回忆';
+    const fileName = createFileName(selectedFile);
+    const path = `${GALLERY_PATH}/${fileName}`;
+    const photo = {
+      id: fileName,
+      url: buildCdnUrl(fileName),
+      note,
+      path,
+      createdAt: new Date().toISOString()
+    };
+
+    setUploadBusy(true);
+    uploadProgressText.textContent = '正在上传照片到 GitHub…';
+
+    try {
+      await uploadImageToGitHub(selectedFile, fileName, token);
+      uploadProgressText.textContent = '照片已上传，正在同步相册备注…';
+
+      let manifestSynced = true;
+      try {
+        await appendPhotoToManifest(photo, token);
+      } catch (manifestError) {
+        manifestSynced = false;
+        console.warn('照片已上传，但相册索引同步失败：', manifestError);
+      }
+
+      remotePhotos = mergePhotoLists(remotePhotos, [photo]);
+      saveStoredPhotos(mergePhotoLists(storedPhotos, [photo]));
+      renderGallery(getVisiblePhotos());
+      setUploadBusy(false);
+      closeUploadModal();
+
+      if (manifestSynced) {
+        setGalleryStatus('上传成功，已经加入相册。其他设备点「同步相册」也能看到。', 'success');
+        burstHearts(window.innerWidth / 2, window.innerHeight * 0.34, 14);
+      } else {
+        setGalleryStatus(
+          '照片已经上传到 GitHub，但备注索引同步失败；当前设备已保存，其他设备可能暂时看不到备注。',
+          'error'
+        );
+      }
+    } catch (error) {
+      setUploadBusy(false);
+      showUploadError(friendlyError(error));
+    }
+  });
+
+  renderGallery(getVisiblePhotos());
+  syncGallery({ silent: true });
+})();
 
 </script>
 </body>
